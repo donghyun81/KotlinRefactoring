@@ -28,7 +28,7 @@ fun statement(invoice: Invoice, plays: List<Play>):String {
     for (performance in invoice.performances){
         val play = plays.find { it.name == performance.playID }!!
         var thisAmount = 0
-        when(play.type){
+        when(play.type){ // 희극, 코메디만 적용한 함수지만 후에 더 많은 조건이 생길 경우 이 함수의 복잡도가 너무 크게 증가한다
             "tragedy" -> {
                 thisAmount = 40000
                 if (performance.audience > 30) thisAmount += 1000 *(performance.audience -30)
@@ -42,6 +42,7 @@ fun statement(invoice: Invoice, plays: List<Play>):String {
         }
         volumeCredits += maxOf(performance.audience -30,0)
         if (play.type == "comedy") volumeCredits += floor(performance.audience.toDouble()/5 )
+        // Html로 출력하는 기능이 필요해서 이 청구 결과에 문자열을 추가하는 문장 각각 조건문으로 감싸야함
         result += "${play.name}: $${thisAmount/100} (${performance.audience}석)\n"
         totalAmount += thisAmount
     }
