@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="StatementTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-07-14T04:16:57" hostname="yundonghyeon-ui-MacBookAir.local" time="0.032">
+<testsuite name="StatementTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-07-15T05:03:36" hostname="yundonghyeon-ui-MacBookAir.local" time="0.03">
   <properties/>
-  <testcase name="statement 테스트()" classname="StatementTest" time="0.032"/>
+  <testcase name="statement 테스트()" classname="StatementTest" time="0.03"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
