@@ -3,10 +3,12 @@ package chapter_6
 import chapter_1.Invoice
 import java.util.*
 
-// 이름 : 함수 추출하기
-// 개요 : 행위 코드의 일을 파악하고 독립 함수로 추출하여 적절하 이름을 부여한다.
-// 배경 : 목적과 구현을 분리하는 방식이 가장 합리적인거 같다.(무슨일인지 파악이 어렵다면 함수로 추출하여 '무슨 일'이름을 붙인다)
-// 단순 구현에서 reserve()만 사용한 api가 있을수 있지만 사용 목적의 분리로서 의도 파악을 위해 분리하는게 좋다.
+/*
+ 이름 : 함수 추출하기
+ 개요 : 행위 코드의 일을 파악하고 독립 함수로 추출하여 적절한 이름을 부여한다.
+ 배경 : 목적과 구현을 분리하는 방식이 가장 합리적인거 같다.(무슨일인지 파악이 어렵다면 함수로 추출하여 '무슨 일'이름을 붙인다)
+ 단순 구현에서 reserve()만 사용한 api가 있을수 있지만 사용 목적의 분리로서 의도 파악을 위해 분리하는게 좋다.
+ */
 
 /*
  절차
@@ -19,6 +21,11 @@ import java.util.*
  7. 다른 코드에 방금 추출한 것과 똑같거나 비슷한 코드가 없는지 살피고 방금 추출한 새 함수를 호출할지 검토(인라인 코드를 함수 호출로 바꾸기 8.5절)
  */
 
+fun main() {
+    val orders = listOf(ExtractFunction.Order(100.0), ExtractFunction.Order(200.0), ExtractFunction.Order(300.0))
+    val invoice = ExtractFunction.Invoice("John Doe", orders, Date())
+    ExtractFunction().printOwing(invoice)
+}
 
 // 예시
 class ExtractFunction {
@@ -65,12 +72,6 @@ class ExtractFunction {
         println("채무액: $outstanding")
         println("마감일: ${invoice.dueDate.toLocaleString()}")
 
-    }
-
-    fun main() {
-        val orders = listOf(Order(100.0), Order(200.0), Order(300.0))
-        val invoice = Invoice("John Doe", orders, Date())
-        printOwing(invoice)
     }
 
 }
