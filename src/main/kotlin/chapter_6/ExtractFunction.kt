@@ -1,10 +1,11 @@
 package chapter_6
 
+import chapter_1.Invoice
 import java.util.*
 
-// 함수 추출하기
-// 행위 코드의 일을 파악하고 독립 함수로 추출하여 적절하 이름을 부여한다.
-// 추출 기준 : 목적과 구현을 분리하는 방식이 가장 합리적인거 같다.(무슨일인지 파악이 어렵다면 함수로 추출하여 '무슨 일'이름을 붙인다)
+// 이름 : 함수 추출하기
+// 개요 : 행위 코드의 일을 파악하고 독립 함수로 추출하여 적절하 이름을 부여한다.
+// 배경 : 목적과 구현을 분리하는 방식이 가장 합리적인거 같다.(무슨일인지 파악이 어렵다면 함수로 추출하여 '무슨 일'이름을 붙인다)
 // 단순 구현에서 reserve()만 사용한 api가 있을수 있지만 사용 목적의 분리로서 의도 파악을 위해 분리하는게 좋다.
 
 /*
@@ -19,6 +20,7 @@ import java.util.*
  */
 
 
+// 예시
 class ExtractFunction {
 
     data class Order(val amount: Double)
@@ -31,29 +33,38 @@ class ExtractFunction {
     }
 
     fun printOwing(invoice: Invoice) {
-        var outstanding = 0.0
+        var outstanding = calculatorOutstanding(invoice)
+        printBanner()
+        calculatorOutstanding(invoice)
+        recordDueDate(invoice)
+        printDetails(invoice, outstanding)
 
+    }
+
+    fun printBanner() {
         // 배너 출력
         println("***********")
         println("**고객 채무**")
         println("***********")
+    }
 
-        // 미해결 채무(outstanding) 계산
-        for (o in invoice.orders) {
-            outstanding += o.amount
-        }
+    fun calculatorOutstanding(invoice: Invoice) = invoice.orders.sumOf { it.amount }.toLong()
 
+    fun recordDueDate(invoice: Invoice) {
         // 마감일 기록
         val today = Clock.today
         val cal = Calendar.getInstance()
         cal.time = today
         cal.add(Calendar.DATE, 30)
         invoice.dueDate = cal.time
+    }
 
+    fun printDetails(invoice: Invoice, outstanding: Long) {
         // 세부사항 출력
         println("고객명: ${invoice.customer}")
         println("채무액: $outstanding")
         println("마감일: ${invoice.dueDate.toLocaleString()}")
+
     }
 
     fun main() {
