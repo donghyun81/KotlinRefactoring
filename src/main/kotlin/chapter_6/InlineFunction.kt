@@ -17,43 +17,23 @@ package chapter_6
  */
 
 fun main() {
-    val driver = InlineFunction.Driver(7)
-    val customer = InlineFunction.Customer("John Doe", "New York")
-    println("Driver Rating: ${InlineFunction().rating(driver)}")
-    println("Report Lines: ${InlineFunction().reportLines(customer)}")
+    val inlineFunction = InlineFunction(Driver(7),Customer("John Doe", "New York"))
+    println("Driver Rating: ${inlineFunction.rating()}")
+    println("Report Lines: ${inlineFunction.reportLines()}")
 }
 
-class InlineFunction {
+data class Driver(val numberOfLateDeliveries: Int)
+data class Customer(val name: String, val location: String)
 
-    data class Driver(val numberOfLateDeliveries: Int)
+class InlineFunction(val driver : Driver,val customer:Customer) {
 
-    fun rating(aDriver: Driver): Int {
-        return if (moreThanFiveLateDeliveries(aDriver)) 2 else 1
-    }
+    fun rating(): Int = if (driver.numberOfLateDeliveries > 5) 2 else 1
 
-    fun moreThanFiveLateDeliveries(dvr: Driver): Boolean {
-        return dvr.numberOfLateDeliveries > 5
-    }
-
-    data class Customer(val name: String, val location: String)
-
-    fun reportLines(aCustomer: Customer): List<Pair<String, String>> {
+    fun reportLines(): List<Pair<String, String>> {
         val lines = mutableListOf<Pair<String, String>>()
-        gatherCustomerData(lines, aCustomer)
+        lines.add("name" to customer.name)
+        lines.add("location" to customer.location)
         return lines
     }
-
-    fun gatherCustomerData(out: MutableList<Pair<String, String>>, aCustomer: Customer) {
-        out.add("name" to aCustomer.name)
-        out.add("location" to aCustomer.location)
-    }
-
-    fun main() {
-        val driver = Driver(7)
-        val customer = Customer("John Doe", "New York")
-        println("Driver Rating: ${rating(driver)}")
-        println("Report Lines: ${reportLines(customer)}")
-    }
-
 
 }
