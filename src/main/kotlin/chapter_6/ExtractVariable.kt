@@ -27,12 +27,13 @@ fun main() {
 }
 
 
-class ExtractVariable(private val order:Order) {
+class ExtractVariable(order:Order) {
+    private val basicPrice = order.quantity * order.itemPrice
+    private val quantityDiscount = maxOf(0, order.quantity - 500) * order.itemPrice * 0.05
+    private val shopping = minOf(order.quantity * order.itemPrice * 0.1, 100.0)
     fun price(): Double {
         // 가격 = 기본가격 - 수량할인 + 배송비
-        return order.quantity * order.itemPrice -
-                maxOf(0, order.quantity - 500) * order.itemPrice * 0.05 +
-                minOf(order.quantity * order.itemPrice * 0.1, 100.0)
+        return basicPrice - quantityDiscount + shopping
     }
 
 }
