@@ -16,6 +16,8 @@ dependencies {
     implementation("org.assertj:assertj-build:3.24.2")
     implementation("org.assertj:assertj-core:3.24.2")
     testImplementation(kotlin("test"))
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.6.0")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.6.0")
 
 }
 

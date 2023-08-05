@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class chapter_4.ProvinceTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class chapter_4.ProvinceTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/chapter_4.html">chapter_4</a> &gt; ProvinceTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">1</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.016s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox failures" id="successRate">
+<div class="percent">0%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Failed tests</a>
+</li>
+<li>
+<a href="#tab1">Tests</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="부족분 검사 테스트"></a>
+<h3 class="failures">부족분 검사 테스트</h3>
+<span class="code">
+<pre>org.opentest4j.AssertionFailedError: expected:&lt;6&gt; but was:&lt;5&gt;
+	at app//chapter_4.ProvinceTest$1$1.invokeSuspend(ProvinceTest.kt:12)
+	at app//chapter_4.ProvinceTest$1$1.invoke(ProvinceTest.kt)
+	at app//chapter_4.ProvinceTest$1$1.invoke(ProvinceTest.kt)
+	at app//io.kotest.core.spec.style.scopes.StringSpecRootContext$invoke$1.invokeSuspend(StringSpecRootContext.kt:66)
+	at app//io.kotest.core.spec.style.scopes.StringSpecRootContext$invoke$1.invoke(StringSpecRootContext.kt)
+	at app//io.kotest.core.spec.style.scopes.StringSpecRootContext$invoke$1.invoke(StringSpecRootContext.kt)
+	at app//io.kotest.core.internal.ExecutionsKt$executeWithBehaviours$2$1.invokeSuspend(executions.kt:13)
+	at app//io.kotest.core.internal.ExecutionsKt$executeWithBehaviours$2$1.invoke(executions.kt)
+	at app//io.kotest.core.internal.ExecutionsKt$executeWithBehaviours$2$1.invoke(executions.kt)
+	at app//io.kotest.core.internal.ExecutionsKt.wrapTestWithGlobalAssert(executions.kt:39)
+	at app//io.kotest.core.internal.ExecutionsKt.access$wrapTestWithGlobalAssert(executions.kt:1)
+	at app//io.kotest.core.internal.ExecutionsKt$executeWithBehaviours$2.invokeSuspend(executions.kt:12)
+	at app//io.kotest.core.internal.ExecutionsKt$executeWithBehaviours$2.invoke(executions.kt)
+	at app//io.kotest.core.internal.ExecutionsKt$executeWithBehaviours$2.invoke(executions.kt)
+	at app//io.kotest.core.internal.ExecutionsKt$wrapTestWithAssertionModeCheck$2.invokeSuspend(executions.kt:25)
+	at app//io.kotest.core.internal.ExecutionsKt$wrapTestWithAssertionModeCheck$2.invoke(executions.kt)
+	at app//io.kotest.core.internal.ExecutionsKt$wrapTestWithAssertionModeCheck$2.invoke(executions.kt)
+	at app//io.kotest.core.internal.AssertionsCheckKt.executeWithAssertionsCheck(assertionsCheck.kt:25)
+	at app//io.kotest.core.internal.ExecutionsKt.wrapTestWithAssertionModeCheck(executions.kt:24)
+	at app//io.kotest.core.internal.ExecutionsKt.executeWithBehaviours(executions.kt:11)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeInScope$2.invokeSuspend(TestCaseExecutor.kt:268)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeInScope$2.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeInScope$2.invoke(TestCaseExecutor.kt)
+	at app//kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturn(Undispatched.kt:89)
+	at app//kotlinx.coroutines.CoroutineScopeKt.coroutineScope(CoroutineScope.kt:264)
+	at app//io.kotest.core.internal.TestCaseExecutor.executeInScope(TestCaseExecutor.kt:262)
+	at app//io.kotest.core.internal.TestCaseExecutor.access$executeInScope(TestCaseExecutor.kt:57)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1$3$1$1.invokeSuspend(TestCaseExecutor.kt:234)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1$3$1$1.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1$3$1$1.invoke(TestCaseExecutor.kt)
+	at app//kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturnIgnoreTimeout(Undispatched.kt:100)
+	at app//kotlinx.coroutines.TimeoutKt.setupTimeout(Timeout.kt:148)
+	at app//kotlinx.coroutines.TimeoutKt.withTimeout(Timeout.kt:44)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1$3$1.invokeSuspend(TestCaseExecutor.kt:233)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1$3$1.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1$3$1.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.engine.ExecutorExecutionContext$executeWithTimeoutInterruption$4.invokeSuspend(ExecutorExecutionContext.kt:77)
+	at app//io.kotest.engine.ExecutorExecutionContext$executeWithTimeoutInterruption$4.invoke(ExecutorExecutionContext.kt)
+	at app//io.kotest.engine.ExecutorExecutionContext$executeWithTimeoutInterruption$4.invoke(ExecutorExecutionContext.kt)
+	at app//kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturn(Undispatched.kt:89)
+	at app//kotlinx.coroutines.BuildersKt__Builders_commonKt.withContext(Builders.common.kt:165)
+	at app//kotlinx.coroutines.BuildersKt.withContext(Unknown Source)
+	at app//io.kotest.engine.ExecutorExecutionContext.executeWithTimeoutInterruption(ExecutorExecutionContext.kt:75)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1$3.invokeSuspend(TestCaseExecutor.kt:232)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1$3.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1$3.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.mpp.ReplayKt.replay(replay.kt:18)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1.invokeSuspend(TestCaseExecutor.kt:227)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1$1.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.engine.ExecutorExecutionContext$executeWithTimeoutInterruption$4.invokeSuspend(ExecutorExecutionContext.kt:77)
+	at app//io.kotest.engine.ExecutorExecutionContext$executeWithTimeoutInterruption$4.invoke(ExecutorExecutionContext.kt)
+	at app//io.kotest.engine.ExecutorExecutionContext$executeWithTimeoutInterruption$4.invoke(ExecutorExecutionContext.kt)
+	at app//kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturn(Undispatched.kt:89)
+	at app//kotlinx.coroutines.BuildersKt__Builders_commonKt.withContext(Builders.common.kt:165)
+	at app//kotlinx.coroutines.BuildersKt.withContext(Unknown Source)
+	at app//io.kotest.engine.ExecutorExecutionContext.executeWithTimeoutInterruption(ExecutorExecutionContext.kt:75)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1.invokeSuspend(TestCaseExecutor.kt:220)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4$1.invoke(TestCaseExecutor.kt)
+	at app//kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturnIgnoreTimeout(Undispatched.kt:100)
+	at app//kotlinx.coroutines.TimeoutKt.setupTimeout(Timeout.kt:148)
+	at app//kotlinx.coroutines.TimeoutKt.withTimeout(Timeout.kt:44)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4.invokeSuspend(TestCaseExecutor.kt:219)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.core.internal.TestCaseExecutor$executeAndWait$4.invoke(TestCaseExecutor.kt)
+	at app//kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturn(Undispatched.kt:89)
+	at app//kotlinx.coroutines.SupervisorKt.supervisorScope(Supervisor.kt:57)
+	at app//io.kotest.core.internal.TestCaseExecutor.executeAndWait(TestCaseExecutor.kt:215)
+	at app//io.kotest.core.internal.TestCaseExecutor.invokeTestCase(TestCaseExecutor.kt:184)
+	at app//io.kotest.core.internal.TestCaseExecutor.executeActiveTest(TestCaseExecutor.kt:153)
+	at app//io.kotest.core.internal.TestCaseExecutor.access$executeActiveTest(TestCaseExecutor.kt:57)
+	at app//io.kotest.core.internal.TestCaseExecutor$intercept$innerExecute$1$1.invokeSuspend(TestCaseExecutor.kt:89)
+	at app//io.kotest.core.internal.TestCaseExecutor$intercept$innerExecute$1$1.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.core.internal.TestCaseExecutor$intercept$innerExecute$1$1.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.core.internal.TestCaseExecutor.executeIfEnabled(TestCaseExecutor.kt:117)
+	at app//io.kotest.core.internal.TestCaseExecutor.access$executeIfEnabled(TestCaseExecutor.kt:57)
+	at app//io.kotest.core.internal.TestCaseExecutor$intercept$innerExecute$1.invokeSuspend(TestCaseExecutor.kt:89)
+	at app//io.kotest.core.internal.TestCaseExecutor$intercept$innerExecute$1.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.core.internal.TestCaseExecutor$intercept$innerExecute$1.invoke(TestCaseExecutor.kt)
+	at app//io.kotest.core.internal.TestCaseExecutor.intercept(TestCaseExecutor.kt:103)
+	at app//io.kotest.core.internal.TestCaseExecutor.execute(TestCaseExecutor.kt:69)
+	at app//io.kotest.engine.spec.runners.SingleInstanceSpecRunner.runTest(SingleInstanceSpecRunner.kt:104)
+	at app//io.kotest.engine.spec.runners.SingleInstanceSpecRunner.access$runTest(SingleInstanceSpecRunner.kt:34)
+	at app//io.kotest.engine.spec.runners.SingleInstanceSpecRunner$execute$interceptAndRun$2$4.invokeSuspend(SingleInstanceSpecRunner.kt:57)
+	at app//io.kotest.engine.spec.runners.SingleInstanceSpecRunner$execute$interceptAndRun$2$4.invoke(SingleInstanceSpecRunner.kt)
+	at app//io.kotest.engine.spec.runners.SingleInstanceSpecRunner$execute$interceptAndRun$2$4.invoke(SingleInstanceSpecRunner.kt)
+	at app//io.kotest.engine.launchers.SequentialTestLauncher$launch$3$1$1.invokeSuspend(SequentialTestLauncher.kt:22)
+	at app//kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at app//kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
+	at java.base@11.0.17/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base@11.0.17/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base@11.0.17/java.lang.Thread.run(Thread.java:834)
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="failures">부족분 검사 테스트</td>
+<td class="failures">0.016s</td>
+<td class="failures">failed</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.4.2</a> at 2023. 8. 5. 오후 2:41:46</p>
+</div>
+</div>
+</body>
+</html>
