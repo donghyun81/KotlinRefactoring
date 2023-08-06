@@ -16,7 +16,7 @@ package chapter_7
  6. 테스트
  7. 함수 이름을 바꾸면 원본 접근자의 동작을 더 잘 드러낼 수 있는지 검토
   */
-data class Order(var priority:Priority)
+// data class Order(var priority:Priority)
 
 class Priority(rating:Int){
     val rating = rating.toString()
