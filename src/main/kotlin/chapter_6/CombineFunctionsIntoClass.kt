@@ -14,6 +14,7 @@ package chapter_6
  3. 데이터를 조작하는 로직들은 함수로 추출해서 새 클래스로 옮긴다.
  */
 
+
 data class Read(
     val customer :String,
     val quantity : Int,
