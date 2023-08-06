@@ -16,7 +16,9 @@ package chapter_7
  */
 fun main(){
     data class Department(var chargeCode:Int,var manager:String)
-    data class Person(val name:String,val department:Department)
-    val manager = Person("나",Department(123,"너")).department.manager
+    data class Person(val name:String,val department:Department){
+        fun getManager() = department.manager
+    }
+    val manager = Person("나",Department(123,"너")).getManager()
     println(manager)
 }
