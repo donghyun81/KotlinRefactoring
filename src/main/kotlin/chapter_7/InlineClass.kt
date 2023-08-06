@@ -14,15 +14,12 @@ package chapter_7
  */
 
 fun main(){
+    println(Shipment().getTrackingInfo())
 
 }
-class TrackingInformation {
+
+class Shipment(){
     private val shippingCompany = 0
     private val trackingNumber = 0
-    fun getDisplay() = "$shippingCompany: $trackingNumber"
-}
-
-class Shipment(var trackingInformation: TrackingInformation){
-    fun getTrackingInfo() = trackingInformation.getDisplay()
-
+    fun getTrackingInfo() = "$shippingCompany: $trackingNumber"
 }
