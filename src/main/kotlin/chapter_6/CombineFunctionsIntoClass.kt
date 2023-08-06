@@ -35,10 +35,9 @@ class Reading(data:Read){
 }
 fun main(){
     //클라이언트 1
-
     val aReading = Reading(acquireReading())
     val baseCharge = aReading.baseCharge
     val taxableCharge = aReading.taxableCharge
 }
 
-fun acquireReading() = Read("ivan", 10,5,2017)
+private fun acquireReading() = Read("ivan", 10,5,2017)
