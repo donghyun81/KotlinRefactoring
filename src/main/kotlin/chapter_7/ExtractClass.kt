@@ -19,7 +19,10 @@ package chapter_7
  6. 양쪽 클래스의 인터페이스를 살펴보면서 불필요한 메서드 제거, 이름도 새로운 환경에 맞게 변경.
  7. 새 클래스를 외부로 노출할지 정한다. 노출하려거든 새 클래스에 참조를 값으로 바꾸기를 적용할지 고민
  */
-data class Person(var name:String,val officeAreaCode :String,val officeNum:String){
+class Person(var name:String,val officeAreaCode :String,val officeNum:String){
+    fun getTelephoneNum() = Telephone(officeAreaCode,officeNum).getTelephoneNum()
+}
+class Telephone(private val officeAreaCode :String, private val officeNum:String){
     fun getTelephoneNum() = "$officeAreaCode - $officeNum"
 }
 fun main(){
