@@ -13,28 +13,32 @@ package chapter_6
  2. 공통 레코드를 사용하는 함수 각각을 새 클래스로 옮긴다.
  3. 데이터를 조작하는 로직들은 함수로 추출해서 새 클래스로 옮긴다.
  */
-class Reading(){
+
+data class Read(
+    val customer :String,
+    val quantity : Int,
+    val month :Int,
+    val year :Int
+)
+class Reading(data:Read){
+    val customer = data.customer
+    val quantity = data.quantity
+    val month = data.month
+    val year =  data.year
+    val baseCharge = baseRate(month,year) * quantity
+    val taxableCharge = maxOf(0,baseCharge - taxThreshold(year) )
+
+    fun baseRate(month:Int,year:Int) = month+year
+
+    fun taxThreshold(year:Int) = 10
 
 }
 fun main(){
     //클라이언트 1
 
-    val aReading = acquireReading()
-    val baseCharge = baseRate(aReading.month,aReading.year) * aReading.quantity
-
-    //클라이언트 2
-
-    val aReading = acquireReading()
-    val baseCharge = baseRate(aReading.month,aReading.year) * aReading.quantity
-    val taxableCharge = maxOf(0,base-taxThreshold(aReading.year))
-
-    //클라이언트 3
-    val aReading = acquireReading()
-    val baseChargeAmount = baseRate(aReading.month,aReading.year) * aReading.quantity
-    fun calculateBaseCharge(aReading) = baseRate(aReading.month,aReading.year) * aReading.quantity
+    val aReading = Reading(acquireReading())
+    val baseCharge = aReading.baseCharge
+    val taxableCharge = aReading.taxableCharge
 }
-class CombineFunctionsIntoClass {
-    val aReading = acquireReading()
-    val baseCharge = baseRate(aReading.month,aReading.year) * aReading.quantity
-    val taxableCharge = maxOf(0,base-taxThreshold(aReading.year))
-}
+
+fun acquireReading() = Read("ivan", 10,5,2017)
