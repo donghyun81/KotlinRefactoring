@@ -24,16 +24,15 @@ package chapter_7
  6. 변수 인라인하기로 임시 변수제거
  */
 fun main() {
-
+    println(Order(10,Item("빵",100)).getPrice())
+    println(Order(10,Item("빵",101)).getPrice())
 }
 
 data class Item(val name: String, val price: Int)
 class Order(val quantity: Int, val item: Item) {
-    fun getPrice() :Double {
-        var basePrice = this.quantity * item.price
-        var discountFactor = 0.98
-
-        if(basePrice > 1000) discountFactor -= 0.03
-        return basePrice * discountFactor
-    }
+    private val basePrice = getBasePrice()
+    private val discountFactor = getDisCountFactor()
+    private fun getBasePrice() = this.quantity * item.price
+    private fun getDisCountFactor() = if (basePrice >1000) 0.95 else 0.98
+    fun getPrice() :Double = basePrice * discountFactor
 }
