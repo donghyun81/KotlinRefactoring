@@ -22,6 +22,14 @@ package chapter_7
  */
 
 fun main(){
+    class Person(val name: String) {
+        private val courses: MutableList<Course> = mutableListOf()
+
+        // 컬렉션을 읽기 위한 메서드
+        fun getCourses() = courses
+        fun addCourses(course: Course) {courses.add(course)}
+        fun removeCourses(course: Course) {require(courses.remove(course))}
+    }
     val person = Person("나")
     for (i in 0 until 4){
         person.addCourses(Course("캡슐화",true))
@@ -29,6 +37,8 @@ fun main(){
     println(person.getCourses())
     person.removeCourses(Course("캡슐화",true))
     println(person.getCourses())
+
+
 }
 //data class Person(val name:String,private val courses:MutableList<Course>){
 //    fun getCourses() = courses
@@ -37,14 +47,6 @@ fun main(){
 //}
 
 // 데이터 표현하고 다루기뿐 아니라 컬렉션의 추가 작업도 실행되기 때문에 class를 사용하는게 더 적합하다고 판단했습니다.
-class Person(val name: String) {
-    private val courses: MutableList<Course> = mutableListOf()
-
-    // 컬렉션을 읽기 위한 메서드
-    fun getCourses() = courses
-    fun addCourses(course: Course) {courses.add(course)}
-    fun removeCourses(course: Course) {require(courses.remove(course))}
-}
 
 data class Course(val name:String,val isAdvanced:Boolean)
 class EncapsulateCollection {
