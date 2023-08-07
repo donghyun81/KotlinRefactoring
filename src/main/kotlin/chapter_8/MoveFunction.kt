@@ -49,6 +49,14 @@ fun xx_calculateDistance (points:List<Pair<String,Int>>) :Int {
 data class Type(val isPremium:Boolean)
 class Account(){
     val daysOverdrawn = 0
+    fun getBankCharge():Double{ // 은행 이자 계산
+        var result = 4.5
+        if (daysOverdrawn > 0) result += AccountType(daysOverdrawn).overdraftCharge
+        return result
+    }
+}
+
+class AccountType(val daysOverdrawn:Int){
     val type = Type(false)
     val overdraftCharge:Double
         get() {
@@ -59,12 +67,5 @@ class Account(){
             }
             return daysOverdrawn* 1.75
         }
-    fun getBankCharge():Double{ // 은행 이자 계산
-        var result = 4.5
-        if (daysOverdrawn > 0) result += overdraftCharge
-        return result
-    }
-    fun getOverdraftCharge():Int{ // 초과 인출 이자 계산
-        return 1
-    }
+
 }
