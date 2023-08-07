@@ -30,16 +30,18 @@ data class TrackSummary(val time:Int,val distance:Int,val pace:Int)
 
 fun trackSummary(points:List<Pair<String,Int>>) : TrackSummary{
     fun calculateTime() :Int = 0
-    fun calculateDistance () :Int {
-        var result = 0
-        for (point in points.sortedBy { it.second }){
-            val (_,distance) = point
-            result += distance
-        }
-        return result
-    }
+
     val totalTime = calculateTime()
-    val totalDistance = calculateDistance()
+    val totalDistance = xx_calculateDistance(points)
     val pace = totalTime / 60 / totalDistance
     return TrackSummary(totalTime,totalDistance,pace)
+}
+
+fun xx_calculateDistance (points:List<Pair<String,Int>>) :Int {
+    var result = 0
+    for (point in points.sortedBy { it.second }){
+        val (_,distance) = point
+        result += distance
+    }
+    return result
 }
