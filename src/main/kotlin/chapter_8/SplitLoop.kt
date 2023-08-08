@@ -17,11 +17,12 @@ package chapter_8
  4. 완료됐으면, 각 반복문을 함수로 추출할지 고민
  */
 fun main(){
-    var netProfit = 0.0
-    var sales = 0.0
     val weekdaySales = listOf(1000,2000,3000,4000,5000,6000,7000)
-    for (daySales in weekdaySales){
-        sales += daySales
-        netProfit += daySales * 0.5
-    }
+    var netProfit = getTotalWeekdayNetProfit(weekdaySales)
+    var sales = getTotalWeekdaySales(weekdaySales)
+    println(netProfit)
+    println(sales)
+
 }
+fun getTotalWeekdaySales(weekdaySales:List<Int>) = weekdaySales.sum()
+fun getTotalWeekdayNetProfit(weekdaySales:List<Int>) = weekdaySales.sumOf { it.times(0.5) }
