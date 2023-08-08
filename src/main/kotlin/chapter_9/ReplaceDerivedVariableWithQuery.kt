@@ -24,12 +24,10 @@ package chapter_9
  */
 data class Adjustment(val amount:Int)
 class ProductionPlan(production:Int){
-    var production  = production
     var adjustments = mutableListOf<Adjustment>()
+    var production  = adjustments.sumOf { it.amount }
     fun applyAdjustment(anAdjustment:Adjustment){
         adjustments.add(anAdjustment)
-        production += anAdjustment.amount
     }
-
 
 }
