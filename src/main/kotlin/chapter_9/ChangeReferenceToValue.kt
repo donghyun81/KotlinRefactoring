@@ -16,7 +16,13 @@ package chapter_9
 class Person(){
     val telePhoneNum = TelePhoneNum(123,456)
     var officeAreaCode = telePhoneNum.areaCode
+        set(arg) {
+            TelePhoneNum(arg,5678).areaCode
+        }
     var officeNumber = telePhoneNum.number
+        set(arg) {
+            TelePhoneNum(1234,arg).number
+        }
 
 }
-data class TelePhoneNum(var areaCode:Int,var number:Int)
+data class TelePhoneNum(val areaCode:Int,val number:Int)
