@@ -21,6 +21,24 @@ import chapter_6.Customer
  3. 호스트 객체의 생성자들을 수정하여 필요한 객체를 이 저장소에서 찾도록 한다. 수정마다 테스트
  */
 fun main(){
-    data class Order(val num:Int,var customer:Customer)
     data class Customer(val id:String)
+
+    class CustomersRepository(){
+        var customers = mutableListOf<Customer>()
+
+        fun initialize(){
+            customers.clear()
+        }
+        fun registerCustomer(id:String):Customer?{
+            if (!customers.contains(Customer(id))) customers.add(Customer(id))
+            return findCustomer(id)
+        }
+        fun findCustomer(id:String): Customer? {
+            return customers.find { it.id==id }
+        }
+    }
+    class Order(val num:Int,var id:String){
+        var customer = CustomersRepository().registerCustomer(id)
+    }
+
 }
