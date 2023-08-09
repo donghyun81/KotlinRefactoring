@@ -18,12 +18,8 @@ package chapter_10
  */
 fun main(){
 
-    fun isScholarship(reportScore:Int,midtermExam:Int,Finals:Int) : Boolean{
-      if (reportScore >= 80) return false
-        if (midtermExam >= 80) return false
-        if (Finals >= 80) return false
-        return  true
-    }
+    fun isScholarship(reportScore:Int,midtermExam:Int,Finals:Int) : Boolean =
+        !(reportScore >= 80 || midtermExam >= 80 || Finals >= 80)
 }
 class ConsolidateConditionalExpression {
 }
