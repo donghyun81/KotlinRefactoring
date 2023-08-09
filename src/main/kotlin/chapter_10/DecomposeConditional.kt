@@ -11,6 +11,9 @@ package chapter_10
  1. 조건식과 그 조건식에 딸린 조건절 각각을 함수로 추출한다.
  */
 fun main(){
-    fun discountRate(point:Int):Double = if (point>=10) 0.1 else 0.05
-
+    fun isPremium(point:Int) = point >= 10
+    fun applyDiscountRate(discountRate : Double,price:Double) = price * discountRate
+    fun discount(point:Int,price:Double):Double =
+        if (isPremium(point)) applyDiscountRate(0.1,price)
+        else applyDiscountRate(0.05,price)
 }
