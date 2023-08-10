@@ -21,30 +21,67 @@ package chapter_10
  이 메서드를 추상으로 선언하거나 서브클래스에서 처리해야함을 알리는 에러를 던진다
  */
 
-data class Bird(val name:String,val type:String,val numberOfCoconuts :Int,val voltage :Int,val isNailed:Boolean)
+open class Bird(name:String, type:String, numberOfCoconuts :Int, voltage :Int, isNailed:Boolean){
+    val name = name
+    val type = type
+    val numberOfCoconuts = numberOfCoconuts
+    val voltage = voltage
+    val isNailed = isNailed
+
+    open fun plumage():String{
+        return when(type){
+            "유럽 제비" -> "보통이다"
+            "아프리카 제비" -> if (numberOfCoconuts>2) "지쳤다" else "보통이다"
+            "노르웨이 파랑 앵무" -> if (voltage>100) "그을렸다" else "예쁘다"
+            else -> "알 수 없다"
+        }
+    }
+
+    open fun airSpeedVelocity():Double?{
+        return when(type){
+            "유럽 제비" -> 35.0
+            "아프리카 제비" -> 40.0 - 2 * numberOfCoconuts
+            "노르웨이 파랑 앵무" -> if (isNailed) 0.0 else 10.0 + voltage / 10.0
+            else -> null
+        }
+    }
+}
+
+fun createBird(name:String, type:String, numberOfCoconuts :Int, voltage :Int, isNailed:Boolean) :Bird{
+    val bird = Bird(name,type,numberOfCoconuts, voltage, isNailed)
+    return when(bird.type){
+        "유럽 제비" -> EuropeanSwallow(bird)
+        "아프리카 제비" -> AfricanSwallow(bird)
+        "노르웨이 파랑 앵무" -> NorwegianBlueSwallow(bird)
+        else -> bird
+    }
+}
+
+class EuropeanSwallow(bird:Bird) :
+    Bird(bird.name,bird.type,bird.numberOfCoconuts,bird.voltage,bird.isNailed) {
+    override fun plumage():String = "보통이다"
+    override fun airSpeedVelocity(): Double? = 35.0
+    }
+
+class AfricanSwallow(bird:Bird) :
+    Bird(bird.name,bird.type,bird.numberOfCoconuts,bird.voltage,bird.isNailed) {
+    override fun plumage():String = if (numberOfCoconuts>2) "지쳤다" else "보통이다"
+    override fun airSpeedVelocity(): Double? = 40.0 - 2 * numberOfCoconuts
+    }
+class NorwegianBlueSwallow(bird:Bird) :
+    Bird(bird.name,bird.type,bird.numberOfCoconuts,bird.voltage,bird.isNailed) {
+    override fun plumage():String= if (voltage>100) "그을렸다" else "예쁘다"
+    override fun airSpeedVelocity(): Double? = if (isNailed) 0.0 else 10.0 + voltage / 10.0
+}
 fun plumages(birds:MutableList<Bird>):Map<String,String> {
-    return birds.associate { bird -> bird.name to plumage(bird) }
+    return birds.associate {b ->  val bird = createBird(b.name,b.type,b.numberOfCoconuts,b.voltage,b.isNailed)
+        bird.name to bird.plumage()
+    }
 }
 
 fun speeds(birds: MutableList<Bird>):Map<String,Double?>{
-    return birds.associate { bird ->  bird.name to airSpeedVelocity(bird)}
-
-}
-
-fun plumage(bird:Bird):String{
-    return when(bird.type){
-        "유럽 제비" -> "보통이다"
-        "아프리카 제비" -> if (bird.numberOfCoconuts>2) "지쳤다" else "보통이다"
-        "노르웨이 파랑 앵무" -> if (bird.voltage>100) "그을렸다" else "예쁘다"
-        else -> "알 수 없다"
+    return birds.associate {b ->  val bird = createBird(b.name,b.type,b.numberOfCoconuts,b.voltage,b.isNailed)
+        bird.name to bird.airSpeedVelocity()
     }
-}
 
-fun airSpeedVelocity(bird:Bird):Double?{
-    return when(bird.type){
-        "유럽 제비" -> 35.0
-        "아프리카 제비" -> 40.0 - 2 * bird.numberOfCoconuts
-        "노르웨이 파랑 앵무" -> if (bird.isNailed) 0.0 else 10.0 + bird.voltage / 10.0
-        else -> null
-    }
 }
