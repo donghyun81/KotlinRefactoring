@@ -20,67 +20,74 @@ package chapter_10
  7. 여러 함수를 클래스로 묶기나 여러 함수를 변환 함수로 묶기를 적용하여 특이 케이스를 처리하는 공통 동작을 새로운 요소로 옮긴다.
  8. 아직도 특이 케이스 검사 함수를 이용하는 곳이 남아 있다면 검사 함수를 인라인한다
  */
-open class Site {
-    val customer: Customer = UnknownCustomer()
-}
-
-open class Customer {
-    open val name: String
-        get() = ""
-    var billingPlan: BillingPlan = TODO()
-        get() = BillingPlan()
-    var paymentHistory: PaymentHistory = PaymentHistory()
-}
-
-open class BillingPlan {
+interface BillingPlan {
     // BillingPlan 관련 속성 및 동작 정의
 }
 
+class BasicBillingPlan : BillingPlan {
+    // BasicBillingPlan 관련 속성 및 동작 정의
+}
 class PaymentHistory {
     val weeksDelinquentInLastYear: Int = 0
     // PaymentHistory 관련 속성 및 동작 정의
 }
 
-class UnknownCustomer : Customer() {
+class Site {
+    val customer: Customer
+        get() {
+            val _customer = customer
+            return if (_customer.name == "미확인 고객") UnknownCustomer() else _customer
+        }
+}
+
+fun isUnknown(arg: Customer): Boolean {
+    if (arg !is Customer || arg is UnknownCustomer) {
+        throw Error("잘못된 값 비교: <$arg>")
+    }
+    return arg.name == "미확인 고객"
+}
+
+interface Customer {
+    val name: String
+    var billingPlan: BillingPlan
+    val paymentHistory: PaymentHistory
+    val isUnknown: Boolean
+}
+
+class RegularCustomer : Customer {
+    override val name: String
+        get() = ""
+    override var billingPlan: BillingPlan = BasicBillingPlan()
+    override val paymentHistory: PaymentHistory
+        get() = PaymentHistory()
+    override val isUnknown: Boolean
+        get() = false
+}
+
+class UnknownCustomer : Customer {
     override val name: String
         get() = "거주자"
+    override var billingPlan: BillingPlan = BasicBillingPlan() // registry.billingPlans.basic 대신에 BasicBillingPlan()을 반환
+    override var paymentHistory: PaymentHistory = PaymentHistory()
+    override val isUnknown: Boolean
+        get() = true
 }
+
 
 fun main() {
     val site = Site()
 
-    // client1
-    val aCustomer = site.customer
-    val customerName = if (aCustomer is UnknownCustomer) {
-        aCustomer.name
+    val aCustomer: Customer = site.customer
+    val customerName = aCustomer.name
+
+    val plan = aCustomer.billingPlan
+
+    if (isUnknown(aCustomer)) {
+        // UnknownCustomer의 경우 처리
     } else {
-        aCustomer.name
+        // RegularCustomer의 경우 처리
+        aCustomer.billingPlan = BasicBillingPlan()
     }
 
-    // client2
-    val plan = if (aCustomer is UnknownCustomer) {
-        BasicBillingPlan()
-    } else {
-        aCustomer.billingPlan
-    }
-
-    // client3
-    if (aCustomer !is UnknownCustomer) {
-        aCustomer.billingPlan = NewPlan()
-    }
-
-    // client4
-    val weeksDelinquent = if (aCustomer is UnknownCustomer) {
-        0
-    } else {
-        aCustomer.paymentHistory.weeksDelinquentInLastYear
-    }
-}
-
-class BasicBillingPlan : BillingPlan() {
-    // BasicBillingPlan 관련 속성 및 동작 정의
-}
-
-class NewPlan : BillingPlan() {
-    // NewPlan 관련 속성 및 동작 정의
+    val weeksDelinquent = aCustomer.paymentHistory.weeksDelinquentInLastYear
 }
