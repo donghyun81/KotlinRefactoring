@@ -14,22 +14,13 @@ package chapter_10
 
 fun main(){
 
-    fun sendAlert(){
-        println("알림")
-    }
+    fun sendAlert(){ println("알림") }
     var found = false
     val people = listOf<String>()
     for (p in people) {
-        if (!found) {
-            if (p == "조커") {
+            if (p == "조커" || p=="사루만") {
                 sendAlert()
-                found = true
-            }
-            if (p == "사루만") {
-                sendAlert()
-                found = true
+                return
             }
         }
     }
-
-}
