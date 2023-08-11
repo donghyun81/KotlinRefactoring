@@ -20,7 +20,6 @@ package chapter_10
  6. 슈퍼 클래스 메서드에는 기본 동작 부분만 남긴다. 혹슨 슈퍼클래스가 추상 클래스여야 한다면,
  이 메서드를 추상으로 선언하거나 서브클래스에서 처리해야함을 알리는 에러를 던진다
  */
-
 open class Bird(name:String, type:String, numberOfCoconuts :Int, voltage :Int, isNailed:Boolean){
     val name = name
     val type = type
