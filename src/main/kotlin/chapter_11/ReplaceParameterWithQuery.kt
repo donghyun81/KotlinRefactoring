@@ -23,22 +23,22 @@ package chapter_11
  */
 
 class Order {
+    // 임의의 예제 값으로 초기화
+    var quantity: Int = 0
+    var itemPrice: Double = 0.0
+    val discountLevel = if (quantity > 100) 2 else 1
     val finalPrice: Double
         get() {
             val basePrice = quantity * itemPrice
-            val discountLevel: Int = if (quantity > 100) 2 else 1
-            return discountPrice(basePrice, discountLevel)
+            return discountPrice(basePrice)
         }
 
-    fun discountPrice(basePrice: Double, discountLevel: Int): Double {
-        return when (discountLevel) {
+    fun discountPrice(basePrice: Double): Double {
+        return when (this.discountLevel) {
             1 -> basePrice * 0.95
             2 -> basePrice * 0.9
             else -> basePrice
         }
     }
 
-    // 임의의 예제 값으로 초기화
-    var quantity: Int = 0
-    var itemPrice: Double = 0.0
 }
