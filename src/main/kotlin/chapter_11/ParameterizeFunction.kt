@@ -26,11 +26,20 @@ fun fivePercentRaise(aPerson: Person) {
     aPerson.salary *= 1.05
 }
 
+fun raise(aPerson: Person,factor:Double){
+    aPerson.salary *= 1+factor
+}
+
 // Example 2
+fun withinBand(usage: Int,bottom:Int,top:Int): Int {
+    return if (usage > bottom) (usage.coerceAtMost(top) - bottom) else 0
+}
 
 fun baseCharge(usage: Int): USD {
-    if (usage < 0) return usd(0)
-    val amount = bottomBand(usage) * 0.03 + middleBand(usage) * 0.05 + topBand(usage) * 0.07
+    if (usage < 0) return usd(0.0)
+    val amount = withinBand(usage,0,100) * 0.03 +
+            withinBand(usage,100,200) * 0.05 +
+            withinBand(usage,200, Int.MAX_VALUE) * 0.07
     return usd(amount)
 }
 
@@ -38,9 +47,6 @@ fun bottomBand(usage: Int): Int {
     return usage.coerceAtMost(100)
 }
 
-fun middleBand(usage: Int): Int {
-    return if (usage > 100) (usage.coerceAtMost(200) - 100) else 0
-}
 
 fun topBand(usage: Int): Int {
     return if (usage > 200) (usage - 200) else 0
