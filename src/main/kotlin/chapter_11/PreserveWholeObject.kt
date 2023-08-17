@@ -26,8 +26,8 @@ package chapter_11
  */
 
 class HeatingPlan(private val temperatureRange: TemperatureRange) {
-    fun withinRange(bottom: Int, top: Int): Boolean {
-        return bottom >= temperatureRange.low && top <= temperatureRange.high
+    fun withinRange(aNumberRange:TemperatureRange): Boolean {
+        return aNumberRange.low >= temperatureRange.low && aNumberRange.high <= temperatureRange.high
     }
 }
 
@@ -39,11 +39,11 @@ val alert = mutableListOf<String>()
 
 class Room(val daysTempRange: TemperatureRange)
 
-val low = aRoom.daysTempRange.low
-val high = aRoom.daysTempRange.high
 
 fun main(){
-    if (aPlan.withinRange(low, high)) {
+
+
+    if (aPlan.withinRange(aRoom.daysTempRange)) {
         alert.add("방 온도가 지정범위를 벗어났습니다.")
     }
 }
