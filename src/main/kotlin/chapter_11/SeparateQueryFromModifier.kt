@@ -19,19 +19,28 @@ package chapter_11
 fun  main() {
 
 }
-fun alertForMiscreant(people: List<String>): String {
+fun alertForMiscreant(people: List<String>){
         for (p in people) {
             if (p == "조커" || p == "사루만") {
                 setOffAlarms()
-                return " $p"
             }
         }
-        return ""
     }
+
+fun findMiscreant(people: List<String>): String {
+    for (p in people) {
+        if (p == "조커" || p == "사루만") {
+            return " $p"
+        }
+    }
+    return ""
+}
+
+
 
 fun setOffAlarms() {
     println("알람 끄기")
 }
 
 val people = listOf("조커", "배트맨", "스폰")
-    val found = alertForMiscreant(people)
+    val found = findMiscreant(people)
