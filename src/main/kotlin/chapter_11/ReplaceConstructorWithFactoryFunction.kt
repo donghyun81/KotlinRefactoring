@@ -38,8 +38,12 @@ class Employee(private val _name: String, private val _typeCode: String) {
 }
 
 fun main() {
-    val candidate = Employee(getDocumentName(), getDocumentEmpType())
-    val leadEngineer = Employee(getDocumentLeadEngineer(), "E")
+    val candidate = createEmployee(getDocumentName(), getDocumentEmpType())
+    val leadEngineer = createEmployee(getDocumentLeadEngineer(), "E")
+}
+
+fun createEmployee(name:String, typeCode:String):Employee{
+    return Employee(name,typeCode)
 }
 
 fun getDocumentName(): String {
