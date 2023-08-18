@@ -17,19 +17,18 @@ package chapter_11
 
 
 fun main() {
-    class Person {
+    class Person(id:String) {
         var name: String = ""
             get() = field
             set(value) {
                 field = value
             }
 
-        var id: String = ""
-            private set(value) {
-                field = value
-            }
+        val id  = id
+
     }
-    val martin = Person()
+    val martin = Person("1234")
+    println(martin.id)
 
     martin.name = "마틴"
     // martin.id = "1234" // 이 줄은 에러가 발생합니다. private setter 때문에 외부에서 설정할 수 없습니다.
