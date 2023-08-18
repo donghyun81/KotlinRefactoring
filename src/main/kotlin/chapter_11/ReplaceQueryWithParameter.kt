@@ -20,7 +20,7 @@ package chapter_11
  5. 새 함수의 이름을 원래 함수의 이름으로 수정
   */
 
-val thermostat = Thermometer()
+
 
 class Thermometer {
     var selectedTemperature = 15
@@ -28,7 +28,8 @@ class Thermometer {
 }
 
 fun main() {
-    val thePlan = HeatingPlan()
+    val thermostat = Thermometer()
+    val thePlan = HeatingPlan(thermostat)
 
     when {
         thePlan.targetTemperature > thermostat.currentTemperature -> setToHeat()
@@ -36,16 +37,18 @@ fun main() {
         else -> setOff()
     }
 }
-class HeatingPlan {
+
+class HeatingPlan(thermostat:Thermometer) {
+    val selectedTemperature =  thermostat.selectedTemperature
     private val _min = 0// 최소값 설정
         private val _max = 100// 최대값 설정
 
     val targetTemperature: Int
         get() {
             return when {
-                thermostat.selectedTemperature > _max -> _max
-                thermostat.selectedTemperature < _min -> _min
-                else -> thermostat.selectedTemperature
+                selectedTemperature > _max -> _max
+                selectedTemperature < _min -> _min
+                else -> selectedTemperature
             }
         }
 }
