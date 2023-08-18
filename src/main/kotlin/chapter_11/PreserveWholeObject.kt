@@ -25,25 +25,25 @@ package chapter_11
  6. 새 함수의 이름을 적절히 수정하고 모든 호출자에 반영
  */
 
-class HeatingPlan(private val temperatureRange: TemperatureRange) {
-    fun withinRange(aNumberRange:TemperatureRange): Boolean {
-        return aNumberRange.low >= temperatureRange.low && aNumberRange.high <= temperatureRange.high
-    }
-}
-
-data class TemperatureRange(val low: Int, val high: Int)
-
-val aRoom = Room(TemperatureRange(15, 25))
-val aPlan = HeatingPlan(TemperatureRange(18, 22))
-val alert = mutableListOf<String>()
-
-class Room(val daysTempRange: TemperatureRange)
-
-
-fun main(){
-
-
-    if (aPlan.withinRange(aRoom.daysTempRange)) {
-        alert.add("방 온도가 지정범위를 벗어났습니다.")
-    }
-}
+//class HeatingPlan(private val temperatureRange: TemperatureRange) {
+//    fun withinRange(aNumberRange:TemperatureRange): Boolean {
+//        return aNumberRange.low >= temperatureRange.low && aNumberRange.high <= temperatureRange.high
+//    }
+//}
+//
+//data class TemperatureRange(val low: Int, val high: Int)
+//
+//val aRoom = Room(TemperatureRange(15, 25))
+//val aPlan = HeatingPlan(TemperatureRange(18, 22))
+//val alert = mutableListOf<String>()
+//
+//class Room(val daysTempRange: TemperatureRange)
+//
+//
+//fun main(){
+//
+//
+//    if (aPlan.withinRange(aRoom.daysTempRange)) {
+//        alert.add("방 온도가 지정범위를 벗어났습니다.")
+//    }
+//}
