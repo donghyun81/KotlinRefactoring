@@ -32,32 +32,35 @@ object CountryData {
 }
 
 fun main(){
+    class OrderProcessingError(errorCode: Int) : Exception("주문처리 오류: $errorCode") {
+        val code: Int = errorCode
+    }
+
     data class ShippingRules(val data: Int)
+
     data class Order(val country: String) // Order 클래스를 적절하게 정의해야 합니다.
 
     fun localShippingRules(country: String): ShippingRules {
         val data = CountryData.shippingRules[country]
 
-        return if (data != null) ShippingRules(data) else ShippingRules(-23)
+        return if (data != null) ShippingRules(data) else throw OrderProcessingError(-23)
     }
 
-    fun calculateShippingCosts(anOrder: Order): Int {
+    fun calculateShippingCosts(anOrder: Order) {
         // 관련 없는 코드
         val shippingRules = localShippingRules(anOrder.country)
-
-        return if (shippingRules.data < 0) shippingRules.data else {
-            // 더 관련 없는 코드
-            0 // 반환값은 필요에 따라 조정하세요.
-        }
+        // 더 관련 없는 코드
     }
 
     val orderData = Order("USA") // 예시 Order 데이터
-    val status = calculateShippingCosts(orderData)
-
-    val errorList = mutableListOf<Map<String, Any>>()
-
-    if (status < 0) {
-        errorList.add(mapOf("order" to orderData, "errorCode" to status))
+    val errorList = mutableListOf<Map<String,Any>>()
+    try {
+        calculateShippingCosts(orderData)
+    } catch (e: OrderProcessingError) {
+        errorList.add(mapOf("order" to orderData, "errorCode" to e.code))
+    } catch (e: Exception) {
+        throw e
     }
+
 
 }
