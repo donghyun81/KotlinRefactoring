@@ -23,11 +23,6 @@ package chapter_11
 
 
 fun main() {
-    var totalAscent = 0.0
-    var totalTime = 0
-    var totalDistance = 0
-
-    val pace = totalTime / 60 / totalDistance
 
     data class Point(val elevation: Double)
 
@@ -37,12 +32,22 @@ fun main() {
         Point(125.0),
         // 이곳에 더 많은 포인트를 추가할 수 있습니다.
     )
-    fun calculateAscent() {
+
+    fun calculateAscent():Double {
+        var result = 0.0
         for (i in 1 until points.size) {
             val verticalChange = points[i].elevation - points[i - 1].elevation
-            totalAscent += if (verticalChange > 0.0) verticalChange else 0.0
+            result  += if (verticalChange > 0.0) verticalChange else 0.0
         }
+        return result
     }
+
+    var totalAscent = calculateAscent()
+    var totalTime = 0
+    var totalDistance = 0
+
+    val pace = totalTime / 60 / totalDistance
+
 
 
 
