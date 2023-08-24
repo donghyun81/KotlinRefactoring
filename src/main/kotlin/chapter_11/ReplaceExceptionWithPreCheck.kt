@@ -14,5 +14,20 @@ package chapter_11
  */
 
 fun main(){
+    open class Employee{
+
+    }
+
+    class SalesPerson : Employee() {
+        fun getName(){
+
+        }
+    }
+
+    class  Engineer :Employee(){
+        fun getName(){
+
+        }
+    }
 
 }
