@@ -17,22 +17,26 @@ package chapter_12
  5. 생성자 시작 부분으로 옮길 수 없는 공통 코드에는 함수 추출하기, 메서드 올리기를 차례로 적용
  */
 fun main(){
-    open class Party
+    open class Party(val name: String)
 
-    class Employee(val id: Long, val name: String, val monthlyCost: Int) : Party() {
+    class Employee(id: Long, name: String, val monthlyCost: Int) : Party(name) {
+        val id: Long = id
+
         // Employee 클래스의 초기화 로직
         // (다른 메서드나 생성자에서 초기화 로직을 추가할 수 있음)
     }
-
     class Staff {
         // Staff 클래스의 내용을 정의해야 합니다.
         // (Staff에 대한 구현이 필요함)
     }
 
-    class Department(val name: String, val staff: Staff) : Party() {
+    class Department(name: String, val staff: Staff) : Party(name) {
         // Department 클래스의 초기화 로직
         // (다른 메서드나 생성자에서 초기화 로직을 추가할 수 있음)
     }
+
+
+
 
 
 }
