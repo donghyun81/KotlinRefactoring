@@ -15,19 +15,19 @@ package chapter_11
 
 fun main(){
     open class Employee{
+        fun getName(){
+
+        }
 
     }
 
     class SalesPerson : Employee() {
-        fun getName(){
-
-        }
     }
 
     class  Engineer :Employee(){
-        fun getName(){
-
-        }
     }
-
+    val person1 : SalesPerson = SalesPerson()
+    person1.getName()
+    val person2 : Engineer = Engineer()
+    person2.getName()
 }
