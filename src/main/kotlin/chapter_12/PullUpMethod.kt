@@ -20,4 +20,19 @@ package chapter_12
  7. 테스트
  8. 모든 서브클래스의 메서드가 없어질 때까지 서브클래스의 메서드를 하나씩 제거
  */
+fun main(){
+    open class Employee(){
+        fun getName(){
 
+        }
+
+    }
+    class SalesPerson : Employee(){
+    }
+    class Engineer : Employee(){
+    }
+    val person1 = SalesPerson()
+    val person2 = Engineer()
+    person1.getName()
+    person2.getName()
+}
