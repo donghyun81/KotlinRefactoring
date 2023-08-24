@@ -15,11 +15,14 @@ package chapter_12
  5. 원래 클래스들을 사용하는 코드를 검토하여 슈퍼클래스의 인터페이스를 사용하게 할지 고민
  */
 fun main(){
-
-    class Employee(val id: Long, val name: String, val monthlyCost: Int) {
+    open class Party(val monthlyCost: Int){
         fun annualCost(): Int {
             return monthlyCost * 12
         }
+
+    }
+    class Employee(val id: Long,monthlyCost: Int ,val name: String) : Party(monthlyCost) {
+
     }
 
     class Staff(val employees: List<Employee>) {
@@ -29,19 +32,10 @@ fun main(){
 
 
     class Department(val name: String, val staff: Staff) {
-        fun length(): Int {
-            return staff.length
-        }
+        fun length(): Int = staff.length
 
-        fun totalMonthlyCost(): Int {
-            return staff.employees
-                .map { it.monthlyCost }
-                .sum()
-        }
+        fun totalMonthlyCost(): Int = staff.employees.sumOf { it.monthlyCost }
 
-        fun totalAnnualCost(): Int {
-            return totalMonthlyCost() * 12
-        }
     }
 
 
