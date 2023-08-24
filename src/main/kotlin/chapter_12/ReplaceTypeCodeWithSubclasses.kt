@@ -27,7 +27,7 @@ package chapter_12
  8. 타입 코드 접근자를 이용하는 메서드 모두에 메서드 내리기와 조건부 로직을 다형성으로 바꾸기 적용
  */
 
-
+/*
     open class Employee(name: String) {
         fun createEmployee(type:String) : Employee{
             return when(type){
@@ -56,3 +56,43 @@ package chapter_12
     class Manager (name:String): Employee(name){
         fun type() = "manager"
     }
+*/
+
+open class Employee(name:String) {
+    var type = EmployeeType("").aString
+        set(value){
+            EmployeeType(value)
+        }
+    fun createEmployee(aString: String) : Employee{
+        return when(aString){
+            "engineer" -> Engineer(name)
+            "salesperson" -> SalesPerson(name)
+            "manager" -> Manager(name)
+            else ->  throw IllegalArgumentException("$type 에 해당하는 직원 유형은 없습니다.")
+        }
+    }
+    var name: String = name
+        private set
+
+    override fun toString(): String {
+        return "Employee{" +
+                "name='$name'" +
+                '}'
+    }
+}
+
+class EmployeeType(val aString:String){
+    override fun toString() = this.aString
+    val a = this.toString()
+
+}
+
+class Engineer (name:String): Employee(name) {
+    fun type() = "engineer"
+}
+class SalesPerson(name:String): Employee(name){
+    fun type() = "salesperson"
+}
+class Manager (name:String): Employee(name){
+    fun type() = "manager"
+}
