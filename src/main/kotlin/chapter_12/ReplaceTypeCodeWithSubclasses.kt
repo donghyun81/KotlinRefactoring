@@ -26,30 +26,33 @@ package chapter_12
  7. 테스트
  8. 타입 코드 접근자를 이용하는 메서드 모두에 메서드 내리기와 조건부 로직을 다형성으로 바꾸기 적용
  */
-fun main(){
-    class Employee(name: String, type: String) {
-        var name: String = name
-            private set
 
-        var type: String = type
-            private set
 
-        init {
-            validateType(type)
-        }
-
-        private fun validateType(type: String) {
-            if (!listOf("manager", "engineer", "salesperson").any { it == type }) {
-                throw IllegalArgumentException("$type 에 해당하는 직원 유형은 없습니다.")
+    open class Employee(name: String) {
+        fun createEmployee(type:String) : Employee{
+            return when(type){
+                "engineer" -> Engineer(name)
+                "salesperson" -> SalesPerson(name)
+                "manager" -> Manager(name)
+                else ->  throw IllegalArgumentException("$type 에 해당하는 직원 유형은 없습니다.")
             }
         }
+        var name: String = name
+            private set
 
         override fun toString(): String {
             return "Employee{" +
                     "name='$name'" +
-                    ", type='$type'" +
                     '}'
         }
     }
 
-}
+    class Engineer (name:String): Employee(name) {
+        fun type() = "engineer"
+    }
+    class SalesPerson(name:String): Employee(name){
+        fun type() = "salesperson"
+    }
+    class Manager (name:String): Employee(name){
+        fun type() = "manager"
+    }
