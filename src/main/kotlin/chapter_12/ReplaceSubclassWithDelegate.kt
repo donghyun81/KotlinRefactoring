@@ -35,32 +35,88 @@ import kotlin.math.roundToInt
  11. 테스트
  12. 서브클래스를 삭제
  */
-    class Show(val price:Int,val properties :List<String>){
-        fun hasOwnProperty(property:String) = properties.contains(property)
+//    class Show(val price:Int,val properties :List<String>){
+//        fun hasOwnProperty(property:String) = properties.contains(property)
+//
+//    }
+//    class Extras(val premiumFee:Double,val properties :List<String>){
+//        fun hasOwnProperty(property:String) = properties.contains(property)
+//    }
+//
+//
+//    open class Booking(val show: Show, val date: LocalDateTime) {
+//        val isPeakDay = LocalDateTime.now() == date
+//        val premiumDelegate = this
+//        open fun hasTalkback() =  show.hasOwnProperty("talkBack") && !isPeakDay
+//        open fun basePrice() = if(isPeakDay) show.price+ (show.price * 0.15).roundToInt() else show.price
+//        fun bePremiumDelegate(extras: Extras) =  PremiumBookingDelegate(this,extras)
+//    }
+//
+//class PremiumBookingDelegate(val booking: Booking,val extras: Extras){
+//    fun hasTalkback() = booking.show.hasOwnProperty("talkBack")
+//    fun basePrice() = (booking.basePrice() + extras.premiumFee).roundToInt()
+//    fun getDinner() = extras.hasOwnProperty("dinner") && booking.isPeakDay
+//}
+//
+//    fun createBooking(show:Show,date:LocalDateTime) = Booking(show,date)
+//    fun createPremiumBooking(show:Show,date:LocalDateTime, extras: Extras) : PremiumBookingDelegate{
+//        val result = Booking(show,date)
+//        return result.bePremiumDelegate(extras)
+//    }
 
+
+fun main() {
+    data class Data(
+        val type: String,
+        val name: String,
+        val plumage: String,
+        val numberOfCoconuts: Int,
+        val voltage: Int,
+        val isNailed: Boolean
+    )
+
+    open class Bird(val name: String, val plumage: String) {
+        open fun airSpeedVelocity(): Int {
+            return 0
+        }
     }
-    class Extras(val premiumFee:Double,val properties :List<String>){
-        fun hasOwnProperty(property:String) = properties.contains(property)
+
+    class EuropeanSwallow(data: Data) : Bird(data.name, data.plumage) {
+        override fun airSpeedVelocity(): Int {
+            return 35
+        }
     }
 
+    class AfricanSwallow(data: Data) : Bird(data.name, data.plumage) {
+        val numberOfCoconuts: Int = data.numberOfCoconuts
 
-    open class Booking(val show: Show, val date: LocalDateTime) {
-        val isPeakDay = LocalDateTime.now() == date
-        val premiumDelegate = this
-        open fun hasTalkback() =  show.hasOwnProperty("talkBack") && !isPeakDay
-        open fun basePrice() = if(isPeakDay) show.price+ (show.price * 0.15).roundToInt() else show.price
-        fun bePremiumDelegate(extras: Extras) =  PremiumBookingDelegate(this,extras)
+        override fun airSpeedVelocity(): Int {
+            return 40 - 2 * numberOfCoconuts
+        }
     }
 
-class PremiumBookingDelegate(val booking: Booking,val extras: Extras){
-    fun hasTalkback() = booking.show.hasOwnProperty("talkBack")
-    fun basePrice() = (booking.basePrice() + extras.premiumFee).roundToInt()
-    fun getDinner() = extras.hasOwnProperty("dinner") && booking.isPeakDay
+    class NorwegianBlueParrot(data: Data) : Bird(data.name, data.plumage) {
+        val voltage: Int = data.voltage
+        val isNailed: Boolean = data.isNailed
+
+       fun plumage(): String {
+            return if (voltage > 100) "그을렸다." else super.plumage
+        }
+
+        override fun airSpeedVelocity(): Int {
+            return if (isNailed) 0 else 10 + voltage / 10
+        }
+    }
+
+    class Client {
+        fun createBird(data: Data): Bird {
+            return when (data.type) {
+                "유럽 제비" -> EuropeanSwallow(data)
+                "아프리카 제비" -> AfricanSwallow(data)
+                "노르웨이 파랑 앵무" -> NorwegianBlueParrot(data)
+                else -> Bird(data.name, data.plumage)
+            }
+        }
+    }
+
 }
-
-    fun createBooking(show:Show,date:LocalDateTime) = Booking(show,date)
-    fun createPremiumBooking(show:Show,date:LocalDateTime, extras: Extras) : PremiumBookingDelegate{
-        val result = Booking(show,date)
-        return result.bePremiumDelegate(extras)
-    }
-
