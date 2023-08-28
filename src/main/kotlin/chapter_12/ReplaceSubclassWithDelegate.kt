@@ -35,7 +35,6 @@ import kotlin.math.roundToInt
  11. 테스트
  12. 서브클래스를 삭제
  */
-fun main(){
     class Show(val price:Int,val properties :List<String>){
         fun hasOwnProperty(property:String) = properties.contains(property)
 
@@ -44,20 +43,24 @@ fun main(){
         fun hasOwnProperty(property:String) = properties.contains(property)
     }
 
+
     open class Booking(val show: Show, val date: LocalDateTime) {
         val isPeakDay = LocalDateTime.now() == date
-        open fun hasTalkback() =  show.hasOwnProperty("talkBakc") && !isPeakDay
+        val premiumDelegate = this
+        open fun hasTalkback() =  show.hasOwnProperty("talkBack") && !isPeakDay
         open fun basePrice() = if(isPeakDay) show.price+ (show.price * 0.15).roundToInt() else show.price
-        // 기타 코드...
+        fun bePremiumDelegate(extras: Extras) =  PremiumBookingDelegate(this,extras)
     }
 
-    class PremiumBooking(show: Show, date: LocalDateTime, val extras: Extras) : Booking(show, date) {
-        override fun hasTalkback() = show.hasOwnProperty("talkBakc")
-        override fun basePrice() = (super.basePrice() + extras.premiumFee).roundToInt()
-        fun getDinner() = extras.hasOwnProperty("dinner") && super.isPeakDay
-
-    }
-
-
-
+class PremiumBookingDelegate(val booking: Booking,val extras: Extras){
+    fun hasTalkback() = booking.show.hasOwnProperty("talkBack")
+    fun basePrice() = (booking.basePrice() + extras.premiumFee).roundToInt()
+    fun getDinner() = extras.hasOwnProperty("dinner") && booking.isPeakDay
 }
+
+    fun createBooking(show:Show,date:LocalDateTime) = Booking(show,date)
+    fun createPremiumBooking(show:Show,date:LocalDateTime, extras: Extras) : PremiumBookingDelegate{
+        val result = Booking(show,date)
+        return result.bePremiumDelegate(extras)
+    }
+
