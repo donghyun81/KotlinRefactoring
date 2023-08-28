@@ -1,6 +1,7 @@
 package chapter_12
 
 import java.time.LocalDateTime
+import java.util.Date
 import kotlin.math.roundToInt
 
 /*
@@ -65,58 +66,55 @@ import kotlin.math.roundToInt
 //    }
 
 
-fun main() {
-    data class Data(
-        val type: String,
-        val name: String,
-        val plumage: String,
-        val numberOfCoconuts: Int,
-        val voltage: Int,
-        val isNailed: Boolean
-    )
+data class BirdData(
+    val type: String,
+    val name: String,
+    val plumage: String,
+    val numberOfCoconuts: Int,
 
-    open class Bird(val name: String, val plumage: String) {
-        open fun airSpeedVelocity(): Int {
-            return 0
-        }
+    val voltage: Int,
+    val isNailed: Boolean
+)
+
+open class Bird(val data: BirdData) {
+    val name = data.name
+    val plumage = data.plumage
+    val speciesDelegate = selectSpeciesDelegate(data)
+
+    fun selectSpeciesDelegate(data: BirdData) = when (data.type) {
+        "유럽 제비" -> EuropeanSwallowDelegate(data,this)
+        "아프리카 제비" ->AfricanSwallowDelegate(data,this)
+        "노르웨이 파랑 앵무" -> NorwegianBlueParrotDelegate(data,this)
+        else -> null
     }
 
-    class EuropeanSwallow(data: Data) : Bird(data.name, data.plumage) {
-        override fun airSpeedVelocity(): Int {
-            return 35
-        }
-    }
+    open fun airSpeedVelocity(): Int? = speciesDelegate?.airSpeedVelocity() ?: 0
+}
 
-    class AfricanSwallow(data: Data) : Bird(data.name, data.plumage) {
-        val numberOfCoconuts: Int = data.numberOfCoconuts
+open class SpeciesDelegate(val data: BirdData,val bird: Bird) {
+    open fun plumage()  = bird.plumage
+    open fun airSpeedVelocity():Int? = null
+}
+class EuropeanSwallowDelegate(data: BirdData,bird: Bird) :SpeciesDelegate(data, bird){
+    override fun airSpeedVelocity() = 35
+}
 
-        override fun airSpeedVelocity(): Int {
-            return 40 - 2 * numberOfCoconuts
-        }
-    }
+class AfricanSwallowDelegate(data: BirdData,bird:Bird):SpeciesDelegate(data, bird){
+    val numberOfCoconuts: Int = data.numberOfCoconuts
+     override fun airSpeedVelocity() = 40 - 2 * numberOfCoconuts
 
-    class NorwegianBlueParrot(data: Data) : Bird(data.name, data.plumage) {
-        val voltage: Int = data.voltage
-        val isNailed: Boolean = data.isNailed
+}
 
-       fun plumage(): String {
-            return if (voltage > 100) "그을렸다." else super.plumage
-        }
+class NorwegianBlueParrotDelegate(data: BirdData,bird:Bird):SpeciesDelegate(data, bird){
+    val voltage: Int = data.voltage
+    val isNailed: Boolean = data.isNailed
 
-        override fun airSpeedVelocity(): Int {
-            return if (isNailed) 0 else 10 + voltage / 10
-        }
-    }
+    override fun plumage() = if (voltage > 100) "그을렸다." else bird.plumage
 
-    class Client {
-        fun createBird(data: Data): Bird {
-            return when (data.type) {
-                "유럽 제비" -> EuropeanSwallow(data)
-                "아프리카 제비" -> AfricanSwallow(data)
-                "노르웨이 파랑 앵무" -> NorwegianBlueParrot(data)
-                else -> Bird(data.name, data.plumage)
-            }
-        }
-    }
+    override fun airSpeedVelocity(): Int = if (isNailed) 0 else 10 + voltage / 10
+}
 
+
+class Client {
+    fun createBird(data: BirdData): Bird  = Bird(data)
 }
