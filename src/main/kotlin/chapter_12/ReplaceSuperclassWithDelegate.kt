@@ -30,9 +30,19 @@ open class CatalogItem(val id: Long, val title: String, val tags: List<String>) 
         return tags.contains(tag)
     }
 }
+class Catalog(){
+    val items = mutableListOf<CatalogItem>()
+    fun addItems(item:CatalogItem) {
+        items.add(item)
+    }
+    fun getItem(id:Long):CatalogItem{
+        return items.find { it.id == id } ?: throw IllegalArgumentException()
+    }
+}
 
-class Scroll(id: Long, title: String, tags: List<String>,val catalogItem: CatalogItem, private val lastCleaned: LocalDateTime)
+class Scroll(id: Long, title: String, tags: List<String>,catalogId: Long,catalog: Catalog, private val lastCleaned: LocalDateTime)
      {
+         val catalogItem = catalog.getItem(catalogId)
     fun needsCleaning(targetDate: LocalDateTime): Boolean {
         val threshold = if (catalogItem.hashTag("revered")) 700 else 1500
         return daysSinceLastCleaning(targetDate) > threshold
