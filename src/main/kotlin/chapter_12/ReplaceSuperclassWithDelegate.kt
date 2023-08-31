@@ -31,11 +31,10 @@ open class CatalogItem(val id: Long, val title: String, val tags: List<String>) 
     }
 }
 
-class Scroll(id: Long, title: String, tags: List<String>, private val lastCleaned: LocalDateTime) :
-    CatalogItem(id, title, tags) {
-
+class Scroll(id: Long, title: String, tags: List<String>,val catalogItem: CatalogItem, private val lastCleaned: LocalDateTime)
+     {
     fun needsCleaning(targetDate: LocalDateTime): Boolean {
-        val threshold = if (hashTag("revered")) 700 else 1500
+        val threshold = if (catalogItem.hashTag("revered")) 700 else 1500
         return daysSinceLastCleaning(targetDate) > threshold
     }
 
